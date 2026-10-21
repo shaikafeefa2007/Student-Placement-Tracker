@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Arrays",
+        "status": "Completed"
+    },
+    {
+        "name": "Strings",
+        "status": "Completed"
+    },
+    {
+        "name": "Linked List",
+        "status": "In Progress"
+    },
+    {
+        "name": "Trees",
+        "status": "Completed"
+    },
+    {
+        "name": "Graphs",
+        "status": "Not Started"
+    }
+]

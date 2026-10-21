@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Edit Application</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <nav>
+
+        <h2>Student Placement Tracker</h2>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/skills">Skills</a>
+
+            <a href="/progress">Progress</a>
+
+            <a href="/applications">Applications</a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>Edit Application ✏️</h1>
+
+
+        <div class="card">
+
+            <form
+                action="/edit-application/{{ application['id'] }}"
+                method="POST"
+            >
+
+                <input
+                    type="text"
+                    name="company"
+                    value="{{ application['company'] }}"
+                    placeholder="Company Name"
+                    required
+                >
+
+
+                <input
+                    type="text"
+                    name="role"
+                    value="{{ application['role'] }}"
+                    placeholder="Job Role"
+                    required
+                >
+
+
+                <select name="status">
+
+                    <option value="Applied"
+                        {% if application['status'] == 'Applied' %}
+                        selected
+                        {% endif %}>
+                        Applied
+                    </option>
+
+
+                    <option value="Interview"
+                        {% if application['status'] == 'Interview' %}
+                        selected
+                        {% endif %}>
+                        Interview
+                    </option>
+
+
+                    <option value="Selected"
+                        {% if application['status'] == 'Selected' %}
+                        selected
+                        {% endif %}>
+                        Selected
+                    </option>
+
+
+                    <option value="Rejected"
+                        {% if application['status'] == 'Rejected' %}
+                        selected
+                        {% endif %}>
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <input
+                    type="date"
+                    name="application_date"
+                    value="{{ application['application_date'] }}"
+                >
+
+
+                <button type="submit">
+                    Update Application
+                </button>
+
+            </form>
+
+
+            <br>
+
+
+            <a class="button" href="/applications">
+                Cancel
+            </a>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

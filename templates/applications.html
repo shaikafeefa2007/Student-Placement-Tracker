@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Applications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>Student Placement Tracker</h2>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <a href="/dsa">DSA</a>
+        <a href="/aptitude">Aptitude</a>
+        <a href="/reasoning">Reasoning</a>
+        <a href="/applications">Applications</a>
+        <a href="/certifications">Certifications</a>
+        <a href="/projects">Projects</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Placement Applications 🏢</h1>
+
+    <p class="intro">
+        Track companies, roles, application dates, deadlines and placement status.
+    </p>
+
+    <div class="card form-card">
+
+        <h2>➕ Add New Application</h2>
+
+        <form action="/add-application" method="POST">
+
+            <label>Company Name</label>
+            <input type="text" name="company"
+                   placeholder="Example: TCS" required>
+
+            <label>Job Role</label>
+            <input type="text" name="role"
+                   placeholder="Example: Software Engineer" required>
+
+            <label>Status</label>
+            <select name="status">
+                <option value="Applied">Applied</option>
+                <option value="Shortlisted">Shortlisted</option>
+                <option value="Interview">Interview</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+
+            <label>Application Date</label>
+            <input type="date" name="application_date">
+
+            <label>Deadline</label>
+            <input type="date" name="deadline">
+
+            <button type="submit">Add Application</button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>🔎 Search & Filter</h2>
+
+        <form action="/applications" method="GET">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search company or role"
+                   value="{{ search }}">
+
+            <select name="status">
+
+                <option value="">All Statuses</option>
+
+                {% for status in ["Applied", "Shortlisted", "Interview", "Selected", "Rejected"] %}
+                <option value="{{ status }}"
+                    {% if status_filter == status %}selected{% endif %}>
+                    {{ status }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+            <button type="submit">Search</button>
+
+            <a class="button" href="/applications">Clear</a>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <h2>📋 My Applications</h2>
+
+    <div class="cards">
+
+        {% for application in applications %}
+
+        <div class="card">
+
+            <h2>🏢 {{ application["company"] }}</h2>
+
+            <p>
+                <strong>Role:</strong>
+                {{ application["role"] }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ application["status"] }}
+            </p>
+
+            <p>
+                <strong>Application Date:</strong>
+                {{ application["application_date"] or "Not provided" }}
+            </p>
+
+            <p>
+                <strong>Deadline:</strong>
+                {{ application["deadline"] or "Not provided" }}
+            </p>
+
+            <p>
+                <strong>Deadline Status:</strong>
+                <span class="status-badge">
+                    {{ application["deadline_status"] }}
+                </span>
+            </p>
+
+            {% if application["days_left"] is not none %}
+
+                {% if application["days_left"] < 0 %}
+
+                    <p class="deadline-passed">
+                        🔴 Deadline passed
+                    </p>
+
+                {% elif application["days_left"] == 0 %}
+
+                    <p class="deadline-warning">
+                        ⚠️ Deadline is today!
+                    </p>
+
+                {% elif application["days_left"] == 1 %}
+
+                    <p class="deadline-warning">
+                        ⚠️ 1 day remaining
+                    </p>
+
+                {% else %}
+
+                    <p class="deadline-upcoming">
+                        📅 {{ application["days_left"] }} days remaining
+                    </p>
+
+                {% endif %}
+
+            {% endif %}
+
+            <details>
+
+                <summary>✏️ Edit Application</summary>
+
+                <br>
+
+                <form action="/update-application/{{ application['id'] }}"
+                      method="POST">
+
+                    <label>Company</label>
+                    <input type="text"
+                           name="company"
+                           value="{{ application['company'] }}"
+                           required>
+
+                    <label>Role</label>
+                    <input type="text"
+                           name="role"
+                           value="{{ application['role'] }}"
+                           required>
+
+                    <label>Status</label>
+                    <select name="status">
+
+                        {% for status in ["Applied", "Shortlisted", "Interview", "Selected", "Rejected"] %}
+                        <option value="{{ status }}"
+                            {% if application["status"] == status %}selected{% endif %}>
+                            {{ status }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                    <label>Application Date</label>
+                    <input type="date"
+                           name="application_date"
+                           value="{{ application['application_date'] or '' }}">
+
+                    <label>Deadline</label>
+                    <input type="date"
+                           name="deadline"
+                           value="{{ application['deadline'] or '' }}">
+
+                    <button type="submit">Save Changes</button>
+
+                </form>
+
+            </details>
+
+            <br>
+
+            <form action="/delete-application/{{ application['id'] }}"
+                  method="POST">
+
+                <button type="submit"
+                        class="danger-button">
+                    Delete
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="card">
+            <h2>No Applications Yet</h2>
+            <p>Add your first placement application above.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

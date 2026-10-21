@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aptitude Preparation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>Student Placement Tracker</h2>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <a href="/dsa">DSA</a>
+        <a href="/aptitude">Aptitude</a>
+        <a href="/reasoning">Reasoning</a>
+        <a href="/applications">Applications</a>
+        <a href="/certifications">Certifications</a>
+        <a href="/projects">Projects</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Aptitude Preparation 📊</h1>
+
+    <p class="intro">
+        Track your quantitative aptitude and problem-solving preparation.
+    </p>
+
+    <div class="card form-card">
+
+        <h2>➕ Add New Topic</h2>
+
+        <form action="/add-aptitude" method="POST">
+
+            <label>Topic</label>
+            <input type="text"
+                   name="topic"
+                   placeholder="Enter topic name"
+                   required>
+
+            <label>Status</label>
+            <select name="status">
+                <option value="Not Started">Not Started</option>
+                <option value="Learning">Learning</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <button type="submit">Add Topic</button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>🔎 Search & Filter</h2>
+
+        <form method="GET">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search topic"
+                   value="{{ search }}">
+
+            <select name="status">
+
+                <option value="">All Statuses</option>
+
+                {% for status in ["Not Started", "Learning", "Completed"] %}
+                <option value="{{ status }}"
+                    {% if status_filter == status %}selected{% endif %}>
+                    {{ status }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+            <button type="submit">Search</button>
+
+            <a class="button" href="{{ request.path }}">Clear</a>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <h2>📚 Topics</h2>
+
+    <div class="cards">
+
+        {% for topic in topics %}
+
+        <div class="card">
+
+            <h2>📚 {{ topic["topic"] }}</h2>
+
+            <p>
+                <strong>Status:</strong>
+                {{ topic["status"] }}
+            </p>
+
+            <details>
+
+                <summary>✏️ Edit Topic</summary>
+
+                <br>
+
+                <form action="/update-reasoning/{{ topic['id'] }}"
+                      method="POST">
+
+                    <input type="text"
+                           name="topic"
+                           value="{{ topic['topic'] }}"
+                           required>
+
+                    <select name="status">
+
+                        {% for status in ["Not Started", "Learning", "Completed"] %}
+                        <option value="{{ status }}"
+                            {% if topic["status"] == status %}selected{% endif %}>
+                            {{ status }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+
+                </form>
+
+            </details>
+
+            <br>
+
+            <form action="/delete-reasoning/{{ topic['id'] }}"
+                  method="POST">
+
+                <button type="submit" class="danger-button">
+                    Delete
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="card">
+            <h2>No Topics Found</h2>
+            <p>Add your first topic above.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
+s

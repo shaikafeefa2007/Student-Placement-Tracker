@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Number Series",
+        "status": "Completed"
+    },
+    {
+        "name": "Coding Decoding",
+        "status": "Completed"
+    },
+    {
+        "name": "Blood Relations",
+        "status": "In Progress"
+    },
+    {
+        "name": "Directions",
+        "status": "Not Started"
+    },
+    {
+        "name": "Puzzles",
+        "status": "Not Started"
+    }
+]

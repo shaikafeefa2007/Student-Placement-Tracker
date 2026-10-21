@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Reasoning Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <h2>Student Placement Tracker</h2>
+
+    <div>
+
+        <a href="/">Home</a>
+
+        <a href="/skills">Skills</a>
+
+        <a href="/dsa">DSA</a>
+
+        <a href="/aptitude">Aptitude</a>
+
+        <a href="/reasoning">Reasoning</a>
+
+        <a href="/progress">Progress</a>
+
+        <a href="/applications">Applications</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <h1>Reasoning Progress 📊</h1>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total Topics</h2>
+
+            <p class="number">
+                {{ total }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+
+        <h2>Overall Reasoning Progress</h2>
+
+
+        <h1>
+            {{ progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+
+            <div
+                class="progress"
+                id="reasoningProgressBar"
+                data-progress="{{ progress }}"
+            >
+
+                {{ progress }}%
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <br>
+
+
+    <a class="button" href="/reasoning">
+
+        Back to Reasoning
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+    const progressBar =
+        document.getElementById("reasoningProgressBar");
+
+    const progressValue =
+        progressBar.dataset.progress;
+
+    progressBar.style.width =
+        progressValue + "%";
+
+</script>
+
+
+</body>
+
+</html>

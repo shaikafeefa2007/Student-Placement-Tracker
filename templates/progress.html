@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Preparation Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav>
+
+    <h2>Student Placement Tracker</h2>
+
+    <div>
+
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <a href="/dsa">DSA</a>
+        <a href="/aptitude">Aptitude</a>
+        <a href="/reasoning">Reasoning</a>
+        <a href="/applications">Applications</a>
+        <a href="/certifications">Certifications</a>
+        <a href="/projects">Projects</a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="container">
+
+
+    <h1>
+        My Preparation Progress 📊
+    </h1>
+
+
+    <p class="intro">
+
+        Track your progress across skills,
+        DSA, aptitude and reasoning.
+
+    </p>
+
+
+
+    <!-- =================================================
+         SKILLS
+    ================================================== -->
+
+    <h2>💻 Skills Progress</h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total Skills</h2>
+
+            <p class="number">
+                {{ total_skills }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed_skills }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning_skills }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started_skills }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+        <h2>Skill Progress</h2>
+
+        <h1>
+            {{ skill_progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+            <div class="progress"
+                 id="skillProgressBar"
+                 data-progress="{{ skill_progress }}">
+
+                {{ skill_progress }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         DSA
+    ================================================== -->
+
+    <h2>🧠 DSA Progress</h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total DSA Topics</h2>
+
+            <p class="number">
+                {{ total_dsa }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed_dsa }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning_dsa }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started_dsa }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+        <h2>DSA Progress</h2>
+
+        <h1>
+            {{ dsa_progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+            <div class="progress"
+                 id="dsaProgressBar"
+                 data-progress="{{ dsa_progress }}">
+
+                {{ dsa_progress }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         APTITUDE
+    ================================================== -->
+
+    <h2>📐 Aptitude Progress</h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total Aptitude Topics</h2>
+
+            <p class="number">
+                {{ total_aptitude }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed_aptitude }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning_aptitude }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started_aptitude }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+        <h2>Aptitude Progress</h2>
+
+        <h1>
+            {{ aptitude_progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+            <div class="progress"
+                 id="aptitudeProgressBar"
+                 data-progress="{{ aptitude_progress }}">
+
+                {{ aptitude_progress }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         REASONING
+    ================================================== -->
+
+    <h2>🧠 Reasoning Progress</h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total Reasoning Topics</h2>
+
+            <p class="number">
+                {{ total_reasoning }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed_reasoning }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning_reasoning }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started_reasoning }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+        <h2>Reasoning Progress</h2>
+
+        <h1>
+            {{ reasoning_progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+            <div class="progress"
+                 id="reasoningProgressBar"
+                 data-progress="{{ reasoning_progress }}">
+
+                {{ reasoning_progress }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PROGRESS BAR JAVASCRIPT
+===================================================== -->
+
+<script>
+
+    const progressBars = [
+
+        "skillProgressBar",
+        "dsaProgressBar",
+        "aptitudeProgressBar",
+        "reasoningProgressBar"
+
+    ];
+
+
+    progressBars.forEach(function(id) {
+
+        const bar = document.getElementById(id);
+
+        if (bar) {
+
+            const value = bar.dataset.progress;
+
+            bar.style.width = value + "%";
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

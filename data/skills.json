@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Python",
+        "status": "Learning"
+    },
+    {
+        "name": "C",
+        "status": "Completed"
+    },
+    {
+        "name": "HTML",
+        "status": "Learning"
+    },
+    {
+        "name": "CSS",
+        "status": "Not Started"
+    },
+    {
+        "name": "SQL",
+        "status": "Not Started"
+    },
+    {
+        "name": "Git",
+        "status": "Not Started"
+    }
+]

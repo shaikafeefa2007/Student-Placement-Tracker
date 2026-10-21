@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DSA Progress</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <h2>Student Placement Tracker</h2>
+
+    <div>
+
+        <a href="/">Home</a>
+
+        <a href="/skills">Skills</a>
+
+        <a href="/dsa">DSA</a>
+
+        <a href="/progress">Progress</a>
+
+        <a href="/applications">Applications</a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+
+    <h1>DSA Progress 📊</h1>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h2>Total Topics</h2>
+
+            <p class="number">
+                {{ total }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Completed</h2>
+
+            <p class="number">
+                {{ completed }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Learning</h2>
+
+            <p class="number">
+                {{ learning }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Not Started</h2>
+
+            <p class="number">
+                {{ not_started }}
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="card progress-card">
+
+
+        <h2>Overall DSA Progress</h2>
+
+
+        <h1>
+            {{ progress }}%
+        </h1>
+
+
+        <div class="progress-bar">
+
+
+            <div
+                class="progress"
+                id="dsaProgressBar"
+                data-progress="{{ progress }}"
+            >
+
+                {{ progress }}%
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <br>
+
+
+    <a class="button" href="/dsa">
+
+        Back to DSA
+
+    </a>
+
+
+</div>
+
+
+<script>
+
+    const progressBar =
+        document.getElementById("dsaProgressBar");
+
+    const progressValue =
+        progressBar.dataset.progress;
+
+    progressBar.style.width =
+        progressValue + "%";
+
+</script>
+
+
+</body>
+
+</html>

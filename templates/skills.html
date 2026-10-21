@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Skills</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>Student Placement Tracker</h2>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <a href="/dsa">DSA</a>
+        <a href="/aptitude">Aptitude</a>
+        <a href="/reasoning">Reasoning</a>
+        <a href="/applications">Applications</a>
+        <a href="/certifications">Certifications</a>
+        <a href="/projects">Projects</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>My Skills 💻</h1>
+
+    <p class="intro">
+        Track your technical and programming skills and monitor your learning progress.
+    </p>
+
+    <div class="card form-card">
+
+        <h2>➕ Add New Skill</h2>
+
+        <form action="/add-skill" method="POST">
+
+            <label>Skill Name</label>
+            <input type="text"
+                   name="name"
+                   placeholder="Example: Python"
+                   required>
+
+            <label>Status</label>
+            <select name="status">
+                <option value="Not Started">Not Started</option>
+                <option value="Learning">Learning</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <button type="submit">Add Skill</button>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>🔎 Search & Filter Skills</h2>
+
+        <form action="/skills" method="GET">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search skill"
+                   value="{{ search }}">
+
+            <select name="status">
+
+                <option value="">All Statuses</option>
+
+                {% for status in ["Not Started", "Learning", "Completed"] %}
+                <option value="{{ status }}"
+                    {% if status_filter == status %}selected{% endif %}>
+                    {{ status }}
+                </option>
+                {% endfor %}
+
+            </select>
+
+            <button type="submit">Search</button>
+            <a class="button" href="/skills">Clear</a>
+
+        </form>
+
+    </div>
+
+    <br>
+
+    <h2>📋 My Skills</h2>
+
+    <div class="cards">
+
+        {% for skill in skills %}
+
+        <div class="card">
+
+            <h2>💻 {{ skill["name"] }}</h2>
+
+            <p>
+                <strong>Status:</strong>
+                {{ skill["status"] }}
+            </p>
+
+            <details>
+
+                <summary>✏️ Edit Skill</summary>
+
+                <br>
+
+                <form action="/update-skill/{{ skill['id'] }}"
+                      method="POST">
+
+                    <input type="text"
+                           name="name"
+                           value="{{ skill['name'] }}"
+                           required>
+
+                    <select name="status">
+
+                        {% for status in ["Not Started", "Learning", "Completed"] %}
+                        <option value="{{ status }}"
+                            {% if skill["status"] == status %}selected{% endif %}>
+                            {{ status }}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+
+                    <button type="submit">Save Changes</button>
+
+                </form>
+
+            </details>
+
+            <br>
+
+            <form action="/delete-skill/{{ skill['id'] }}"
+                  method="POST">
+
+                <button type="submit" class="danger-button">
+                    Delete
+                </button>
+
+            </form>
+
+        </div>
+
+        {% else %}
+
+        <div class="card">
+            <h2>No Skills Found</h2>
+            <p>Add a skill or change your search/filter.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

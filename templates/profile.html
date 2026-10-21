@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placement Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav>
+    <h2>Student Placement Tracker</h2>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <a href="/dsa">DSA</a>
+        <a href="/aptitude">Aptitude</a>
+        <a href="/reasoning">Reasoning</a>
+        <a href="/progress">Progress</a>
+        <a href="/applications">Applications</a>
+        <a href="/certifications">Certifications</a>
+        <a href="/projects">Projects</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1>Placement Dashboard 📊</h1>
+
+    <p class="intro">
+        Track your skills, preparation, projects, certifications,
+        applications and deadlines in one place.
+    </p>
+
+    <h2>💻 Skills Overview</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h2>Total Skills</h2>
+            <p class="number">{{ total_skills }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Completed Skills</h2>
+            <p class="number">{{ completed_skills }}</p>
+        </div>
+
+        <div class="card">
+            <h2>Skill Progress</h2>
+            <p class="number">{{ skill_progress }}%</p>
+        </div>
+    </div>
+
+    <br>
+
+    <h2>📚 Placement Preparation</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>🧠 DSA</h2>
+            <p class="number">{{ dsa_progress }}%</p>
+            <p>{{ completed_dsa }} / {{ total_dsa }} topics completed</p>
+            <a class="button" href="/dsa">Open DSA</a>
+        </div>
+
+        <div class="card">
+            <h2>📐 Aptitude</h2>
+            <p class="number">{{ aptitude_progress }}%</p>
+            <p>{{ completed_aptitude }} / {{ total_aptitude }} topics completed</p>
+            <a class="button" href="/aptitude">Open Aptitude</a>
+        </div>
+
+        <div class="card">
+            <h2>🧠 Reasoning</h2>
+            <p class="number">{{ reasoning_progress }}%</p>
+            <p>{{ completed_reasoning }} / {{ total_reasoning }} topics completed</p>
+            <a class="button" href="/reasoning">Open Reasoning</a>
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>🏢 Placement Applications</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>📋 Total Applications</h2>
+            <p class="number">{{ total_applications }}</p>
+        </div>
+
+        <div class="card">
+            <h2>🎤 Interviews</h2>
+            <p class="number">{{ interview_applications }}</p>
+        </div>
+
+        <div class="card">
+            <h2>🎉 Selected</h2>
+            <p class="number">{{ selected_applications }}</p>
+        </div>
+
+        <div class="card">
+            <h2>❌ Rejected</h2>
+            <p class="number">{{ rejected_applications }}</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>📅 Application Deadlines</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>📅 Upcoming</h2>
+            <p class="number">{{ upcoming_deadlines }}</p>
+            <p>More than 3 days remaining</p>
+        </div>
+
+        <div class="card">
+            <h2>⚠️ Due Soon</h2>
+            <p class="number">{{ due_soon }}</p>
+            <p>3 days or less remaining</p>
+        </div>
+
+        <div class="card">
+            <h2>🔴 Passed</h2>
+            <p class="number">{{ passed_deadlines }}</p>
+            <p>Deadlines already passed</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <a class="button" href="/applications">
+        📅 Manage Application Deadlines
+    </a>
+
+    <br><br>
+
+    <h2>🏆 Portfolio</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>🏆 Certifications</h2>
+            <p class="number">{{ total_certifications }}</p>
+            <p>Certifications added</p>
+            <a class="button" href="/certifications">Manage Certifications</a>
+        </div>
+
+        <div class="card">
+            <h2>🚀 Projects</h2>
+            <p class="number">{{ total_projects }}</p>
+            <p>Projects added</p>
+            <a class="button" href="/projects">Manage Projects</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
